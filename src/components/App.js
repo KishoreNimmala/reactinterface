@@ -11,11 +11,12 @@ class App extends Component{
   constructor(){
       super();
       this.state={
-          myName: 'Kishore',
+          
           myAppointments:[],
           lastIndex:0,
-          formDisplay:false
-
+          formDisplay:false,
+          orderBy:'ownerName',
+          orderDir:'desc'
       }
       this.deleteAppointment=this.deleteAppointment.bind(this);
       this.toggleForm=this.toggleForm.bind(this);
@@ -64,8 +65,22 @@ class App extends Component{
     
   }
 
-  render() { 
-       
+  render() {
+    let order;
+    let filteredApts=this.state.myAppointments;
+    if(this.state.orderDir==='asc'){
+      order=1;
+    }else{
+      order=-1;
+    }  
+    filteredApts.sort((a,b)=>{
+      if(a[this.state.orderBy].toLowerCase()<b[this.state.orderBy].toLowerCase){
+        return -1*order;
+      }else {
+        return 1*order;
+      }
+    });
+
     return (
       <main className="page bg-white" id="petratings">
         <div className="container">
@@ -79,7 +94,7 @@ class App extends Component{
                 />
                 <SearchAppointments />
                 <ListAppointments 
-                appointments={this.state.myAppointments} 
+                appointments={filteredApts} 
                 deleteAppointment={this.deleteAppointment}
                 />
               </div>
