@@ -17,12 +17,13 @@ class App extends Component{
           formDisplay:false,
           orderBy:'aptDate',
           orderDir:'desc',
-          queryText:'ai'
+          queryText:''
       }
       this.deleteAppointment=this.deleteAppointment.bind(this);
       this.toggleForm=this.toggleForm.bind(this);
       this.addAppointment=this.addAppointment.bind(this);
       this.changeOrder=this.changeOrder.bind(this);
+      this.searchApts=this.searchApts.bind(this);
   }
 
   toggleForm(){
@@ -54,6 +55,12 @@ class App extends Component{
       orderBy:order,
       orderDir:dir
     });
+  }
+
+  searchApts(query){
+    this.setState({
+      queryText:query
+    })
   }
 
   componentDidMount(){
@@ -109,7 +116,8 @@ class App extends Component{
                 formDisplay={this.state.formDisplay}
                 toggleForm={this.toggleForm}
                 />
-                <SearchAppointments 
+                <SearchAppointments
+                searchApts={this.searchApts} 
                 orderBy={this.state.orderBy}
                 orderDir={this.state.orderDir}
                 changeOrder={this.changeOrder}
