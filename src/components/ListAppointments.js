@@ -1,5 +1,6 @@
 import React,{component, Component} from 'react';
 import {MdPets} from 'react-icons/md';
+import {FaTimes} from 'react-icons/fa';
 import Moment from 'react-moment';
 
 class ListAppointments extends Component{
@@ -9,13 +10,17 @@ class ListAppointments extends Component{
             {this.props.appointments.map((item,i)=>(
                 <div key={item.aptId} className="pet-item col media py-3">
                     <div className="mr-3">
-                    <button className="pet-delete btn btn-sm btn-danger">
-                        <MdPets />
+                    <button className="pet-delete btn btn-sm btn-danger"
+                        onClick={()=>this.props.deleteAppointment(item)}>
+                        <FaTimes />
                     </button>
                     </div>
         
                     <div className="pet-info media-body">
                     <div className="pet-head d-flex">
+                        <span>
+                            <MdPets />
+                        </span>
                         <span className="pet-name">{item.petName}</span>
                         <span className="apt-date ml-auto">
                             <Moment 
