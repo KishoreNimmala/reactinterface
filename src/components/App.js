@@ -15,8 +15,8 @@ class App extends Component{
           myAppointments:[],
           lastIndex:0,
           formDisplay:false,
-          orderBy:'ownerName',
-          orderDir:'desc'
+          orderBy:'petName',
+          orderDir:'asc'
       }
       this.deleteAppointment=this.deleteAppointment.bind(this);
       this.toggleForm=this.toggleForm.bind(this);
@@ -74,7 +74,7 @@ class App extends Component{
       order=-1;
     }  
     filteredApts.sort((a,b)=>{
-      if(a[this.state.orderBy].toLowerCase()<b[this.state.orderBy].toLowerCase){
+      if(a[this.state.orderBy].toLowerCase()<b[this.state.orderBy].toLowerCase()){
         return -1*order;
       }else {
         return 1*order;
@@ -92,7 +92,10 @@ class App extends Component{
                 formDisplay={this.state.formDisplay}
                 toggleForm={this.toggleForm}
                 />
-                <SearchAppointments />
+                <SearchAppointments 
+                orderBy={this.state.orderBy}
+                orderDir={this.state.orderDir}
+                />
                 <ListAppointments 
                 appointments={filteredApts} 
                 deleteAppointment={this.deleteAppointment}
