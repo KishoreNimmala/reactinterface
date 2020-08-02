@@ -5,7 +5,7 @@ import ListAppointments from './ListAppointments';
 import SearchAppointments from './SearchAppointments';
 import { render } from 'react-dom';
 import { MdTransferWithinAStation } from 'react-icons/md';
-import {without} from 'lodash';
+import {findIndex,without} from 'lodash';
 
 class App extends Component{
   constructor(){
@@ -24,6 +24,7 @@ class App extends Component{
       this.addAppointment=this.addAppointment.bind(this);
       this.changeOrder=this.changeOrder.bind(this);
       this.searchApts=this.searchApts.bind(this);
+      this.updateInfo=this.updateInfo.bind(this);
   }
 
   toggleForm(){
@@ -60,6 +61,17 @@ class App extends Component{
   searchApts(query){
     this.setState({
       queryText:query
+    })
+  }
+  
+  updateInfo(name,value,id){
+    let tempApts=this.state.myAppointments;
+    let indexId=findIndex(this.state.myAppointments,{
+      aptId:id
+    });
+    tempApts[indexId][name]=value;
+    this.setState({
+      myAppointments:tempApts
     })
   }
 
@@ -123,7 +135,8 @@ class App extends Component{
                 changeOrder={this.changeOrder}
                 />
                 <ListAppointments 
-                appointments={filteredApts} 
+                appointments={filteredApts}
+                updateInfo={this.updateInfo} 
                 deleteAppointment={this.deleteAppointment}
                 />
               </div>

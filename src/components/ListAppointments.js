@@ -21,7 +21,11 @@ class ListAppointments extends Component{
                         <span>
                             <MdPets />
                         </span>
-                        <span className="pet-name">{item.petName}</span>
+                        <span className="pet-name"
+                        contentEditable
+                        suppressContentEditableWarning
+                        onBlur={e=>this.props.updateInfo('petName',e.target.innerText,item.aptId)}
+                        >{item.petName}</span>
                         <span className="apt-date ml-auto">
                             <Moment 
                                 date={item.aptDate}
@@ -32,9 +36,17 @@ class ListAppointments extends Component{
                     </div>
         
                     <div className="owner-name">
-                        <span className="label-item">Owner: {item.ownerName}</span>
+                        <span className="label-item"
+                        contentEditable
+                        suppressContentEditableWarning
+                        onBlur={e=>this.props.updateInfo('ownerName',e.target.innerText,item.aptId)}
+                        >Owner: {item.ownerName}</span>
                     </div>
-                    <div className="apt-notes">{item.aptNotes}</div>
+                    <div className="apt-notes"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e=>this.props.updateInfo('aptNotes',e.target.innerText,item.aptId)}
+                    >{item.aptNotes}</div>
                     </div>
                 </div>
             ))}    
