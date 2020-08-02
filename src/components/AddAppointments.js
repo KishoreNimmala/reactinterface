@@ -1,5 +1,4 @@
 import React,{component, Component} from 'react';
-
 class AddAppointments extends Component{
     render(){
         return(

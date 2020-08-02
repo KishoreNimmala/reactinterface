@@ -18,7 +18,6 @@ class App extends Component{
 
       }
       this.deleteAppointment=this.deleteAppointment.bind(this);
-      this.formDisplay=this.formDisplay.bind(this);
   }
 
   
